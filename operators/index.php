@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>Operators</h1>
     <table>
       <thead>
         <tr>
@@ -25,3 +32,5 @@
         </tr>
       </tbody>
     </table>
+  </body>
+</html>
