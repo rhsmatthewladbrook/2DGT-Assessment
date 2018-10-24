@@ -2,9 +2,31 @@
 <html>
   <head>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <script>
+    function script() {
+      document.getElementById("OpType").submit();
+    }
+    </script>
   </head>
   <body>
     <h1>Operators</h1>
+    <form id='OpType'>
+      <select name="type" onchange="submit()">
+        <option value='0'>All Operators</option>
+        <?php
+        $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_data);
+
+        $sql = "SELECT * FROM user_types";
+        $result = mysqli_query($conn, $sql);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo "<option value='" . $row['ID'] . "'>" . $row['Name'] . "</option>";
+        }
+
+        mysqli_close($conn);
+        ?>
+      </select>
+    </form>
     <table>
       <thead>
         <tr>
