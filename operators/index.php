@@ -65,6 +65,10 @@
       } else {
         echo "<tbody>
         <tr>
+        <td colspan='5' style='text-align: center;'>
+        <h1>Uh Oh</h1>
+        <p>We looked really hard but couldn't find any data. Luckily for you, Puff the Magic Dragon has been sent out to search for the data, to help him search click on this <a href='mailto:matthewladbrook@riccarton.school.nz?Subject=Level%20Two%20Digital%20Exam%20No%20Data%20Found%20Operators%20Table' target='_blank'>link</a></p>
+        </td>
         </tr>
         </tbody>";
       }
