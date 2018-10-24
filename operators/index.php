@@ -37,22 +37,38 @@
           <td>Name</td>
         </tr>
       </thead>
-      <tbody>
+      <?php
+      $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_data);
+
+      if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+      }
+
+      $sql = "SELECT o.ID, o.Nick, t.Name AS Type, r.Name AS Region, o.F_Name, o.L_Name FROM operators o JOIN regions r ON o.Region = r.ID JOIN user_types t ON t.ID = o.Type";
+      if (isset($_GET['type']) and $_GET['type'] != 0) {
+         $sql .= " WHERE t.ID = '" . $_GET['type'] . "'";
+       }
+      $result = mysqli_query($conn, $sql);
+
+      if (mysqli_num_rows($result) > 0) {
+        echo "<tbody>";
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo "<tr>
+            <td>" . $row['ID'] . "</td>
+            <td><a href='../operator?id=" . $row['ID'] . "'>" . $row['Nick'] . "</a></td>
+            <td>" . $row['Type'] . "</td>
+            <td>" . $row['Region'] . "</td>
+            <td>" . $row['F_Name'] . " " . $row['L_Name'] . "</td>
+          </tr>";
+        }
+        echo "</tbody>";
+      } else {
+        echo "<tbody>
         <tr>
-          <td>1</td>
-          <td>Java</td>
-          <td>IRCop</td>
-          <td>Oceania</td>
-          <td>Matthew Ladbrook</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Phoenix</td>
-          <td>ChanOp</td>
-          <td>North America</td>
-          <td>Stuart Rogers</td>
-        </tr>
-      </tbody>
+        </tbody>";
+      }
+      ?>
     </table>
   </body>
 </html>
