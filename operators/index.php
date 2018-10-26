@@ -12,7 +12,7 @@
     <h1>Operators</h1>
     <form id='OpType'>
       <select name="type" onchange="submit()">
-        <option value='0'>All Operators</option>
+        <option value='0' <?php if (!isset($_GET['type']) or $_GET['type'] == 0) {echo "selected";} ?>>All Operators</option>
         <?php
         $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_data);
 
@@ -20,7 +20,13 @@
         $result = mysqli_query($conn, $sql);
 
         while ($row = mysqli_fetch_assoc($result)) {
-          echo "<option value='" . $row['ID'] . "'>" . $row['Name'] . "</option>";
+          if ($row['ID'] == $_GET['type']) {
+            $select = " selected";
+          } else {
+            $select = "";
+          }
+
+          echo "<option value='" . $row['ID'] . "'" . $select . ">" . $row['Name'] . "</option>";
         }
 
         mysqli_close($conn);
