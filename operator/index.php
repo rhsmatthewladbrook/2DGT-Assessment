@@ -57,5 +57,35 @@ $op_info = mysqli_fetch_assoc($op_info_result);
         </tbody>
       </table>
     </div>
+    <div>
+      <h2>Permissions</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Channel</td>
+            <td>Level</td>
+        </thead>
+          <?php
+          $permissions_query = "SELECT p.ID, o.Nick AS User, c.Name AS Channel, l.Name AS Level FROM permissions p JOIN channels c ON c.ID = p.Channel JOIN permission_levels l ON l.ID = p.Level JOIN operators o ON o.ID = p.User WHERE p.User = " . $_GET['id'];
+          $permissions_result = mysqli_query($conn, $permissions_query);
+
+          if (mysqli_num_rows($permissions_result) > 0) {
+            while ($row = mysqli_fetch_assoc($permissions_result)) {
+              echo "<tbody>
+              <tr>
+              <td>" . $row['ID'] . "</td>
+              <td>" . $row['Channel'] . "</td>
+              <td>" . $row['Level'] . "</td>
+              </tr>
+              </tbody>";
+            }
+          } else {
+            echo "<h1>Please be assured we are cringing</h1>
+            <p>We would love to tell you what this operator has access to but we seem to have misplaced that info.</p>";
+          }
+          ?>
+      </table>
+    </div>
   </body>
 </html>
