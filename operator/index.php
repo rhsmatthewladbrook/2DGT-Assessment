@@ -2,6 +2,12 @@
 include '../database_details.php';
 
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_data);
+
+$op_info_query = "SELECT o.ID, o.Nick, t.Name AS Type, r.Name AS Region, o.F_Name, o.L_Name FROM operators o JOIN regions r ON o.Region = r.ID JOIN user_types t ON t.ID = o.Type WHERE o.ID = '" . $_GET['id'] . "'";
+$op_info_result = mysqli_query($conn, $op_info_query);
+
+$op_info = mysqli_fetch_assoc($op_info_result);
+?>
 <!DOCTYPE html>
 <html>
   <head>
