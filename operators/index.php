@@ -1,3 +1,4 @@
+<?php include '../database_details.php'; ?>
 <!DOCTYPE html>
 <html>
   <head>
