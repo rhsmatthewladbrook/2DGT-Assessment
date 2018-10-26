@@ -11,14 +11,18 @@ $op_info = mysqli_fetch_assoc($op_info_result);
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Operator - <?php echo $op_info['Nick'] ?></title>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <h1>Java</h1>
-    <p>ID: 1</p>
-    <p>Operator Type: IRCOp</p>
-    <p>Region: Oceania</p>
-    <p>Name: Matthew Ladbrook</p>
+    <p style="float: right; font-size: 10px;"><a href="../">Return to home</a></p>
+    <div class="head">
+      <h1><?php echo $op_info['Nick']; ?></h1>
+      <p>ID: <?php echo $op_info['ID']; ?></p>
+      <p>Operator Type: <?php echo $op_info['Type']; ?></p>
+      <p>Region: <?php echo $op_info['Region']; ?></p>
+      <p>Name: <?php echo $op_info['F_Name'] . " " . $op_info['L_Name'] ?></p>
+    </div>
     <div>
       <h2>Bans</h2>
       <table>
