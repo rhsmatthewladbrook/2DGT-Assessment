@@ -35,13 +35,25 @@ $op_info = mysqli_fetch_assoc($op_info_result);
             <td>Reason</td>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Moe_Lester</td>
-            <td>English</td>
-            <td>23rd November 2018 3:42pm</td>
-            <td>ScoutLink is not a dating sevice.</td>
-          </tr>
+          <?php
+          $bans_query = "SELECT b.ID, b.Nick, c.Name AS Channel, b.Expires, b.Reason FROM bans b LEFT JOIN channels c ON c.ID = b.Channel LEFT JOIN operators o ON o.ID = b.Operator WHERE b.Expires >= CURRENT_TIMESTAMP AND b.Operator = " . $_GET['id'] . " ORDER BY b.Expires";
+          $bans_result = mysqli_query($conn, $bans_query);
+
+          if (mysqli_num_rows($bans_result) > 0) {
+            while ($row = mysqli_fetch_assoc($bans_result)) {
+              echo "<tr>
+              <td>" . $row['ID'] . "</td>
+              <td>" . $row['Nick'] . "</td>
+              <td>" . $row['Channel'] . "</td>
+              <td>" . date("jS F Y g:ia", strtotime($row['Expires'])) . "</td>
+              <td>" . $row['Reason'] . "</td>
+              </tr>";
+            }
+          } else {
+            echo "<h1>Insert Facepalm Here</h1>
+            <p>We aren't sure if there's been a mistake or if this operator is just really, really nice. If you think they have set some bans then tell us by clicking on this link</p>";
+          }
+          ?>
         </tbody>
       </table>
     </div>
