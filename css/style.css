@@ -32,3 +32,13 @@ td {
   border-bottom: 1px solid #ddd;
   padding: 12px;
 }
+
+.half-width {
+  width: calc(50%);
+  float: left;
+}
+
+.head {
+  width: 70%;
+  margin: auto 15%;
+}
