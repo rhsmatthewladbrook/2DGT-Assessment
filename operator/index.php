@@ -1,3 +1,7 @@
+<?php
+include '../database_details.php';
+
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_data);
 <!DOCTYPE html>
 <html>
   <head>
